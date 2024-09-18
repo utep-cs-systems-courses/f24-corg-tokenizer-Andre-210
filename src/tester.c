@@ -108,3 +108,5 @@ static char *all_tests() {
 
     return result != 0;
  }
+
+// test comment, delete later
