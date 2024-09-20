@@ -2,10 +2,15 @@
 #include <stdlib.h>
 #include "tokenizer.h"
 
-int main {
-  char str[] = "   Hello, world!";
+// WILL DELETE LATER
+int main() {
+  char str[] = "tes ting    ";
   char *token = token_start(str);
+  char *token1 = token_terminator(str);
+  //int token2 = count_tokens(str);
   printf("Next word starts at: %s\n", token);
+  printf("Word ends at: %s\n", token1);
+  //printf("Number of tokens: %d\n ", token2);
   return 0;
 }
 
@@ -30,9 +35,9 @@ int non_space_char(char c) {
 /* returns a pointer to the first character of the next
    space-separated token in zero-terminated str. return 0 if
    str does not contain any tokens */
-char *token_start(char *str){
+char *token_start(char *str){  
   while (*str != '\0') {
-    if (non_space_char(*str) {
+    if (non_space_char(*str)) {
 	return str;
    }
     str++;
@@ -40,42 +45,27 @@ char *token_start(char *str){
   return str;
 }
 
-/*
 /* returns a pointer terminator following *token */
 char *token_terminator(char *token) {
-    return;
+  while (*token != '\0') {
+    if (space_char(*token)) {
+      return token;
+    }
+    token++;
+  }
+  return token;
 }
-  
-/* counts the number of tokens in the string argument */
+/* counts the number of tokens in the string argument. */
 int count_tokens(char *str) {
-  return;
-}
-
-/* returns a freshly allocated new zero-terminated string
-   containing <len> chars from <inStr> */
-char *copy_str(char *inStr, short len) {
-  return;
-}
-
-/* returns a freshly allocated new zero-terminated vector of freshly allocated 
-   space-seperated tokens from zero-terminated str
-
-   For example, tokenize ("hello world string") would result in:
-      tokens[0] = "hello"
-      tokens[1] = "world
-      tokens[2] = "string"
-      tokens[3] = 0
-*/
-char **tokenize(char* str) {
-   return;
-}
-
-/* prints all tokens */
-void print_tokens(char **tokens) {
-  return;
-}
-
-/* frees all tokens and the vector conaining them */
-void free_tokens(char **tokens) {
-  return;
-}
+  char *temp = str;
+  temp = token_start(temp);
+  int count = 0;
+  while (*temp) {
+    if (non_space_char(*temp)) {
+      count++;
+    }
+    temp = token_terminator(temp);
+    temp = token_start(temp);
+  }
+  return count;
+  }
